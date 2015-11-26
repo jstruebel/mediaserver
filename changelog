@@ -1,0 +1,16 @@
+turnkey-mediaserver-14.0 (1) turnkey; urgency=low
+
+  * Initial public release of TurnKey Media Server
+
+  * Emby media server configured with library in shared storage directory
+
+  * Latest Debian Jessie package version of Samba.
+
+  * SambaDAV as file server web front-end.
+
+  * Supports NFS, WebDAV access.
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Jonathan Struebel <jonathan.struebel@gmail.com>  Wed, 25 Nov 2015 21:06:30 +0700

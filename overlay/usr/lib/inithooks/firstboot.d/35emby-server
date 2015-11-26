@@ -1,0 +1,33 @@
+#!/bin/bash -e
+# setup Emby media server
+
+. /etc/default/inithooks
+
+EMBY_RUNNING=$(/etc/init.d/emby-server status > /dev/null; echo $?)
+EMBY_SERVER=127.0.0.1
+EMBY_PORT=8096
+CURL="curl --output /dev/null --silent --head --fail"
+
+# Start Emby server if not running
+if [ "$EMBY_RUNNING" != "0" ]; then
+    /etc/init.d/emby-server start
+
+    # Delay until emby has finished starting
+    until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
+        printf .
+        sleep 5
+    done
+fi
+
+[ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
+$INITHOOKS_PATH/bin/emby-server.py --pass="$APP_PASS"
+
+if [ "$APP_PASS" != "" ]; then
+    echo $APP_PASS > /etc/embypass
+else
+    rm -f /etc/embypass
+fi
+
+if [ "$EMBY_RUNNING" != "0" ]; then
+    /etc/init.d/emby-server stop
+fi

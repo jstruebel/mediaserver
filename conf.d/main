@@ -1,0 +1,75 @@
+#!/bin/sh -ex
+
+install()
+{
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get -y \
+        -o DPkg::Options::=--force-confdef \
+        -o DPkg::Options::=--force-confold \
+        install $@
+}
+
+# install python packages needed to setup emby
+install python-requests
+
+# install emby and configure it, HACK since emby blocks the shell when it starts from the deb install
+install emby-server &
+EMBY_PID=$!
+
+while [ ! -f /var/run/emby-server.pid ]
+do
+  sleep 10
+done
+
+# Delay until emby has finished starting
+EMBY_SERVER=127.0.0.1
+EMBY_PORT=8096
+CURL="curl --output /dev/null --silent --head --fail"
+until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
+    sleep 5
+done
+
+# Change default group to users
+usermod -g users emby
+chgrp -R users /usr/lib/emby-server
+chgrp -R users /var/lib/emby-server/*
+
+#Setup default media folders
+mkdir -p /srv/storage/Music
+chown emby:users /srv/storage/Music
+chmod g+w /srv/storage/Music
+
+mkdir -p /srv/storage/Movies
+chown emby:users /srv/storage/Movies
+chmod g+w /srv/storage/Movies
+
+mkdir -p /srv/storage/TVShows
+chown emby:users /srv/storage/TVShows
+chmod g+w /srv/storage/TVShows
+
+mkdir -p /srv/storage/Photos
+chown emby:users /srv/storage/Photos
+chmod g+w /srv/storage/Photos
+
+# Configure Emby through web interface (Now handled in inithooks)
+# CURL="curl -c /tmp/cookie -b /tmp/cookie http://127.0.0.1:8096"
+
+# ${CURL}'/emby/startup/Configuration' --data 'UICulture=en-us' --data 'EnableInternetProviders=true' --data 'SaveLocalMeta=false' --data 'MetadataCountryCode=US' --data 'PreferredMetadataLanguage=en' > /dev/null
+# ${CURL}'/emby/startup/User' --data 'Name=emby' > /dev/null
+# ${CURL}'/emby/Library/VirtualFolders?collectionType=music&refreshLibrary=false&name=Music' --data '{"Paths":["/srv/storage/Music"]}' --header "Content-Type: application/json; charset=UTF-8" > /dev/null
+# ${CURL}'/emby/Library/VirtualFolders?collectionType=movies&refreshLibrary=false&name=Movies' --data '{"Paths":["/srv/storage/Movies"]}' --header "Content-Type: application/json; charset=UTF-8" > /dev/null
+# ${CURL}'/emby/Library/VirtualFolders?collectionType=tvshows&refreshLibrary=false&name=TV' --data '{"Paths":["/srv/storage/TVShows"]}' --header "Content-Type: application/json; charset=UTF-8" > /dev/null
+# ${CURL}'/emby/Library/VirtualFolders?collectionType=photos&refreshLibrary=false&name=Photos' --data '{"Paths":["/srv/storage/Photos"]}' --header "Content-Type: application/json; charset=UTF-8" > /dev/null
+# ${CURL}'/emby/System/Configuration/MetatdataPlugins/Autoset' --data '' > /dev/null
+# ${CURL}'/emby/Startup/Complete' --data '' > /dev/null
+
+# Stop the service
+service emby-server stop
+
+# Let the remaining setup tasks complete
+wait $EMBY_PID
+#sleep 300
+
+# Appears to be started by one of the packages installed for emby
+killall dbus-daemon
+

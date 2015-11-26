@@ -1,0 +1,7 @@
+SambaDAV/WebDAV: https://$ipaddr
+Emby:            https://$ipaddr:6920
+                 http://$ipaddr:6096
+Web shell:       https://$ipaddr:12320
+Webmin:          https://$ipaddr:12321
+SMB/CIFS:        \\$ipaddr (ports 139/445)
+SSH/SFTP:        root@$ipaddr (port 22)

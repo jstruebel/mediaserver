@@ -1,0 +1,14 @@
+#!/bin/bash -ex
+
+dl() {
+    [ "$FAB_HTTP_PROXY" ] && PROXY="--proxy $FAB_HTTP_PROXY"
+    cd $2; curl -L -f -O $PROXY $1; cd -
+}
+
+SRC="/usr/local/src"
+dl http://download.opensuse.org/repositories/home:emby/Debian_8.0/Release.key $SRC
+
+cd $SRC
+apt-key add Release.key
+rm Release.key
+
