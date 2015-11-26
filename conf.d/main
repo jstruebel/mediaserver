@@ -51,6 +51,10 @@ mkdir -p /srv/storage/Photos
 chown emby:users /srv/storage/Photos
 chmod g+w /srv/storage/Photos
 
+# Replace text in README
+CONF=/srv/storage/README.txt
+sed -i "s|File Server|Media Server|" $CONF
+
 # Configure Emby through web interface (Now handled in inithooks)
 # CURL="curl -c /tmp/cookie -b /tmp/cookie http://127.0.0.1:8096"
 

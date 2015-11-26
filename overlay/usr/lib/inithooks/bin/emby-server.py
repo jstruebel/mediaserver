@@ -16,7 +16,7 @@ from subprocess import PIPE
 import signal
 import EmbyTools
 from EmbyTools import UserClient
-import ast
+import json
 
 def fatal(s):
     print >> sys.stderr, "Error:", s
@@ -74,24 +74,21 @@ def main():
         except:
             return
 
-        line = f.readline()
-        while line:
-            fields = line.split()
+        for line in f:
+            fields = line.split('|')
             if '#' in fields[0]:
-                line = f.readline()
                 continue
 
-            json = False
+            jsonEnc = False
             if (fields[2] == "json"):
-                json = True
+                jsonEnc = True
             fields[1] = fields[1].replace("{server}", server, 1)
             fields[1] = fields[1].replace("{user}", emby.getUsername(), 1)
             if len(fields) > 3:
                 fields[3] = fields[3].replace("{user}", emby.getUsername(), 1)
-                emby.doUtils.downloadUrl(fields[1], postBody=fields[3], type=fields[0], json=json, authenticate=False)
+                emby.doUtils.downloadUrl(fields[1], postBody=fields[3], type=fields[0], json=jsonEnc, authenticate=False)
             else:
-                emby.doUtils.downloadUrl(fields[1], type=fields[0], json=json, authenticate=False)
-            line = f.readline()
+                emby.doUtils.downloadUrl(fields[1], type=fields[0], json=jsonEnc, authenticate=False)
 
         f.close()
 
@@ -105,26 +102,23 @@ def main():
     except:
         return
 
-    line = f.readline()
-    while line:
-        fields = line.split()
+    for line in f:
+        fields = line.split('|')
         if '#' in fields[0]:
-            line = f.readline()
             continue
 
-        json = False
+        jsonEnc = False
         if (fields[2] == "json"):
-            json = True
+            jsonEnc = True
         fields[1] = fields[1].replace("{server}", server, 1)
         fields[1] = fields[1].replace("{user}", emby.getUsername(), 1)
         if len(fields) > 3:
             fields[3] = fields[3].replace("{user}", emby.getUsername(), 1)
-            if json:
-                fields[3] = ast.literal_eval(fields[3])
-            emby.doUtils.downloadUrl(fields[1], postBody=fields[3], type=fields[0], json=json, authenticate=True)
+            if jsonEnc:
+                fields[3] = json.loads(fields[3])
+            emby.doUtils.downloadUrl(fields[1], postBody=fields[3], type=fields[0], json=jsonEnc, authenticate=True)
         else:
-            emby.doUtils.downloadUrl(fields[1], type=fields[0], json=json, authenticate=True)
-        line = f.readline()
+            emby.doUtils.downloadUrl(fields[1], type=fields[0], json=jsonEnc, authenticate=True)
 
     f.close()
 
