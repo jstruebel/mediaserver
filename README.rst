@@ -11,7 +11,7 @@ This appliance includes all the standard features in `TurnKey Core`_,
 and on top of that:
 
 - SSL support out of the box.
-- `Emby`_ providing WebUI.
+- `Emby`_ providing WebUI on ports 8096 and 8920 (https).
 - Webmin module for configuring Samba.
 - Includes popular compression support (zip, rar, bz2).
 - Includes flip to convert text file endings between UNIX and DOS
@@ -61,3 +61,4 @@ Credentials *(passwords set at first boot)*
 .. _TurnKey Core: https://www.turnkeylinux.org/core
 .. _Samba: http://www.samba.org/samba/what_is_samba.html
 .. _SambaDAV: https://github.com/1afa/sambadav
+.. _Emby: https://emby.media/

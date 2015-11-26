@@ -1,6 +1,6 @@
 SambaDAV/WebDAV: https://$ipaddr
-Emby:            https://$ipaddr:6920
-                 http://$ipaddr:6096
+Emby:            https://$ipaddr:8920
+                 http://$ipaddr:8096
 Web shell:       https://$ipaddr:12320
 Webmin:          https://$ipaddr:12321
 SMB/CIFS:        \\$ipaddr (ports 139/445)
