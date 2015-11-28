@@ -9,8 +9,8 @@ install()
         install $@
 }
 
-# install python packages needed to setup emby
-install python-requests
+# install python packages needed to setup emby and emby dependencies
+install python-requests mono-runtime mediainfo libsqlite3-dev imagemagick-6.q8 libmagickwand-6.q8-2 libmagickcore-6.q8-2
 
 # install emby and configure it, HACK since emby blocks the shell when it starts from the deb install
 install emby-server &
@@ -28,6 +28,11 @@ CURL="curl --output /dev/null --silent --head --fail"
 until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
     sleep 5
 done
+
+# Rename the samba service
+CONF=/etc/samba/smb.conf
+sed -i "s|FILESERVER|MEDIASERVER|" $CONF
+sed -i "s|FileServer|MediaServer|" $CONF
 
 # Change default group to users
 usermod -g users emby
