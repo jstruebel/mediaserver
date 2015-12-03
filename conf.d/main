@@ -12,22 +12,16 @@ install()
 # install python packages needed to setup emby and emby dependencies
 install python-requests mono-runtime mediainfo libsqlite3-dev imagemagick-6.q8 libmagickwand-6.q8-2 libmagickcore-6.q8-2
 
-# install emby and configure it, HACK since emby blocks the shell when it starts from the deb install
-install emby-server &
-EMBY_PID=$!
+# install emby and configure it, preseed answers (Done during inithooks)
+#echo 'emby-server emby-server/permissions note' | debconf-set-selections
+#echo 'emby-server emby-server/user string emby' | debconf-set-selections
+#install emby-server
+#EMBY_PID=$!
 
-while [ ! -f /var/run/emby-server.pid ]
-do
-  sleep 10
-done
-
-# Delay until emby has finished starting
-EMBY_SERVER=127.0.0.1
-EMBY_PORT=8096
-CURL="curl --output /dev/null --silent --head --fail"
-until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
-    sleep 5
-done
+#while [ ! -f /var/run/emby-server.pid ]
+#do
+#  sleep 10
+#done
 
 # Rename the samba service
 CONF=/etc/samba/smb.conf
@@ -35,30 +29,38 @@ sed -i "s|FILESERVER|MEDIASERVER|" $CONF
 sed -i "s|FileServer|MediaServer|" $CONF
 
 # Change default group to users
-usermod -g users emby
-chgrp -R users /usr/lib/emby-server
-chgrp -R users /var/lib/emby-server/*
+#usermod -g users emby
+#chgrp -R users /usr/lib/emby-server
+#chgrp -R users /var/lib/emby-server/*
 
 #Setup default media folders
 mkdir -p /srv/storage/Music
-chown emby:users /srv/storage/Music
+#chown emby:users /srv/storage/Music
 chmod g+w /srv/storage/Music
 
 mkdir -p /srv/storage/Movies
-chown emby:users /srv/storage/Movies
+#chown emby:users /srv/storage/Movies
 chmod g+w /srv/storage/Movies
 
 mkdir -p /srv/storage/TVShows
-chown emby:users /srv/storage/TVShows
+#chown emby:users /srv/storage/TVShows
 chmod g+w /srv/storage/TVShows
 
 mkdir -p /srv/storage/Photos
-chown emby:users /srv/storage/Photos
+#chown emby:users /srv/storage/Photos
 chmod g+w /srv/storage/Photos
 
 # Replace text in README
 CONF=/srv/storage/README.txt
 sed -i "s|File Server|Media Server|" $CONF
+
+# Delay until emby has finished starting
+#EMBY_SERVER=127.0.0.1
+#EMBY_PORT=8096
+#CURL="curl --output /dev/null --silent --head --fail"
+#until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
+#    sleep 5
+#done
 
 # Configure Emby through web interface (Now handled in inithooks)
 # CURL="curl -c /tmp/cookie -b /tmp/cookie http://127.0.0.1:8096"
@@ -73,12 +75,12 @@ sed -i "s|File Server|Media Server|" $CONF
 # ${CURL}'/emby/Startup/Complete' --data '' > /dev/null
 
 # Stop the service
-service emby-server stop
+#/etc/init.d/emby-server stop
 
 # Let the remaining setup tasks complete
-wait $EMBY_PID
+#wait $EMBY_PID
 #sleep 300
 
-# Appears to be started by one of the packages installed for emby
-killall dbus-daemon
+# Stop dbus daemon started by emby-server dependency on dbus
+#/etc/init.d/dbus stop
 

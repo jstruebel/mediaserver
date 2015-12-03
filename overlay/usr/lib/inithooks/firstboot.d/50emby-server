@@ -1,6 +1,29 @@
 #!/bin/bash -e
 # setup Emby media server
 
+install()
+{
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get -y \
+        -o DPkg::Options::=--force-confdef \
+        -o DPkg::Options::=--force-confold \
+        install $@
+}
+
+# Install Emby server if not already
+install emby-server
+
+# Change default group to users
+usermod -g users emby
+chgrp -R users /usr/lib/emby-server
+chgrp -R users /var/lib/emby-server/*
+
+# Change owner on media folders
+chown emby:users /srv/storage/Music
+chown emby:users /srv/storage/Movies
+chown emby:users /srv/storage/TVShows
+chown emby:users /srv/storage/Photos
+
 . /etc/default/inithooks
 
 EMBY_RUNNING=$(/etc/init.d/emby-server status > /dev/null; echo $?)
@@ -11,13 +34,13 @@ CURL="curl --output /dev/null --silent --head --fail"
 # Start Emby server if not running
 if [ "$EMBY_RUNNING" != "0" ]; then
     /etc/init.d/emby-server start
-
-    # Delay until emby has finished starting
-    until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
-        printf .
-        sleep 5
-    done
 fi
+
+# Delay until emby has finished starting
+until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
+    printf .
+    sleep 5
+done
 
 [ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
 $INITHOOKS_PATH/bin/emby-server.py --pass="$APP_PASS"
