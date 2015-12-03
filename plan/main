@@ -5,3 +5,4 @@
 #include <turnkey/nfs>
 
 php5-ssh2
+sudo
