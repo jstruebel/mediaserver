@@ -24,6 +24,9 @@ chown emby:users /srv/storage/Movies
 chown emby:users /srv/storage/TVShows
 chown emby:users /srv/storage/Photos
 
+# Enable emby service
+systemctl enable emby-server.service
+
 . /etc/default/inithooks
 
 EMBY_RUNNING=$(/etc/init.d/emby-server status > /dev/null; echo $?)
