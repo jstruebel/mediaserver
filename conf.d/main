@@ -73,12 +73,18 @@ sed -i "s|File Server|Media Server|" $CONF
 # ${CURL}'/emby/Startup/Complete' --data '' > /dev/null
 
 # Stop the service
-service emby-server stop
+/etc/init.d/emby-server stop
 
 # Let the remaining setup tasks complete
 wait $EMBY_PID
 #sleep 300
 
-# Appears to be started by one of the packages installed for emby
-killall dbus-daemon
+# Installed as part of Emby setup
+/etc/init.d/dbus stop
+
+# Remove Emby data directory (Necessary for emby to run properly in final appliance, Regenerated when emby first starts)
+rm -r /var/lib/emby-server
+
+# Enable Emby to start at boot
+systemctl enable emby-server.service
 
