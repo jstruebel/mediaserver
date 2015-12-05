@@ -1,6 +1,7 @@
 #!/bin/bash -e
 # setup Emby media server
 
+<<<<<<< HEAD
 install()
 {
     apt-get update
@@ -27,6 +28,8 @@ chown emby:users /srv/storage/Photos
 # Enable emby service
 systemctl enable emby-server.service
 
+=======
+>>>>>>> parent of e97cb12... Changed installation of emby to happen at firstboot instead of build
 . /etc/default/inithooks
 
 EMBY_RUNNING=$(/etc/init.d/emby-server status > /dev/null; echo $?)
@@ -37,13 +40,13 @@ CURL="curl --output /dev/null --silent --head --fail"
 # Start Emby server if not running
 if [ "$EMBY_RUNNING" != "0" ]; then
     /etc/init.d/emby-server start
-fi
 
-# Delay until emby has finished starting
-until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
-    printf .
-    sleep 5
-done
+    # Delay until emby has finished starting
+    until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
+        printf .
+        sleep 5
+    done
+fi
 
 [ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
 $INITHOOKS_PATH/bin/emby-server.py --pass="$APP_PASS"
