@@ -10,7 +10,7 @@ install()
 }
 
 # install python packages needed to setup emby and emby dependencies
-install python-requests mono-runtime mediainfo libsqlite3-dev
+install python-requests mono-runtime mediainfo libsqlite3-dev libembymagickcore-6.q8-2 libembymagickwand-6.q8-2
 
 # install emby and configure it, HACK since emby blocks the shell when it starts from the deb install
 install emby-server &
@@ -40,8 +40,8 @@ chgrp -R users /usr/lib/emby-server
 chgrp -R users /var/lib/emby-server/*
 
 # Change group assigned to emby
-CONF=/etc/default/emby-server
-sed -i "s|EMBY_GROUP=\"emby\"|EMBY_GROUP=\"users\"|" $CONF
+CONF=/etc/emby-server.conf
+echo "EMBY_GROUP=\"users\"" >> $CONF
 
 # Make restart script installed by emby executable
 chmod +x /usr/lib/emby-server/restart.sh
