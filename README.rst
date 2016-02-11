@@ -1,11 +1,16 @@
-Media Server - Simple Network Attached Media Storage
-=============================================
+Emby Mediaserver - Simple Network Attached Media Storage
+========================================================
 
-An easy to use media server that combines Windows-compatible network file
-sharing with web based library and file managers. TurnKey Media Server includes 
-support for DLNA, SMB, SFTP, NFS, WebDAV and rsync file transfer protocols. 
-The server is configured to allow server users to manage files in private 
-or public storage. Based on Emby, Samba and SambaDAV.
+`Emby`_ is an easy to use media server that allows you to bring all 
+of your home videos, music, and photos together into one place. The 
+TurnKey Emby Mediaserver combines Windows-compatible network file 
+sharing with web based library and file managers. Emby can 
+automatically convert and stream your media on-the-fly to play on 
+any DLNA supported device. Additionally TurnKey Emby Mediaserver
+includes support for SMB (via `Samba`_), SFTP, NFS, WebDAV (via 
+`SambaDAV`_) and rsync file transfer protocols. The server is 
+configured to allow users to manage files in private or public 
+storage. 
 
 This appliance includes all the standard features in `TurnKey Core`_,
 and on top of that:
@@ -25,7 +30,7 @@ and on top of that:
 - File server (`Samba`_) configurations:
    
    - Preconfigured wordgroup: WORKGROUP
-   - Preconfigured netbios name: FILESERVER
+   - Preconfigured netbios name: MEDIASERVER
    - Configured Samba and UNIX users/groups synchronization (CLI and
      Webmin).
    - Configured root as administrative samba user.
@@ -57,8 +62,8 @@ Credentials *(passwords set at first boot)*
    
    - username **root** (or Samba users)
 
-
+.. _Emby: https://emby.media/
 .. _TurnKey Core: https://www.turnkeylinux.org/core
 .. _Samba: http://www.samba.org/samba/what_is_samba.html
 .. _SambaDAV: https://github.com/1afa/sambadav
-.. _Emby: https://emby.media/
+

@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-        <title>TurnKey File Server</title>
+        <title>TurnKey Emby Mediaserver</title>
         
         <link rel="stylesheet" href="css/ui.tabs.css" type="text/css" media="print, projection, screen"/>
         <link rel="stylesheet" href="css/base.css" type="text/css"/>
@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <h1>TurnKey File Server</h1>
+        <h1>TurnKey Emby Mediaserver</h1>
         
         <div id="container-1">
             <ul>
@@ -31,6 +31,9 @@
 
             <div id="cp">
                 <div class="fragment-content">
+
+
+
                     <div>
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:12321/samba/index.cgi">
@@ -52,16 +55,33 @@
                         src="images/filemanager.png"/>File Manager<br/>(WebDAV)</a>
                     </div>
                     <div></div>
-
+                    <div>
+                        <a href="http://<?php print
+                        $_SERVER{'HTTP_HOST'}; ?>:8096"><img
+                        src="images/emby.png"/>Emby Frontend<br/>(HTTP)</a>
+                    </div>
+                    <div>
+                        <a href="https://<?php print
+                        $_SERVER{'HTTP_HOST'}; ?>:8920"><img
+                        src="images/emby.png"/>Emby Backend<br />(HTTPS)</a>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                     <h2>Resources and references</h2>
                     <ul>
+                        <li>
+                           <a href="https://github.com/MediaBrowser/Wiki/wiki">
+                           Emby documentation</a>
+                        </li>
                         <li>
                            <a href="http://samba.org/samba/docs">
                            Samba documentation</a>
                         </li>
                         <li>
-                          <a href="http://www.turnkeylinux.org/fileserver">
-                          TurnKey File Server release notes</a>
+                          <a href="http://www.turnkeylinux.org/emby-mediaserver">
+                          TurnKey Emby Mediaserver release notes</a>
                         </li>
                     </ul>
                 </div>
