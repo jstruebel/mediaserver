@@ -7,7 +7,7 @@
 php5-ssh2
 sudo
 
-python-requests	/* Emby denendancy*/
-mediainfo	/* Emby denendancy*/
-libsqlite3-dev	/* Emby denendancy*/
+python-requests  /* Emby dependency*/
+mediainfo        /* Emby dependency*/
+libsqlite3-dev	 /* Emby dependency*/
 
