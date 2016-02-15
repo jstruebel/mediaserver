@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Copyright (c) 2010 Alon Swartz <alon@turnkeylinux.org>
+# Copyright (c) 2015 Jonathan Struebel <jonathan.struebel@gmail.com>
 """Configure Emby Media Server
 
 Arguments:
