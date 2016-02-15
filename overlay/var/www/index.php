@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-        <title>TurnKey Emby Mediaserver</title>
+        <title>TurnKey Mediaserver</title>
         
         <link rel="stylesheet" href="css/ui.tabs.css" type="text/css" media="print, projection, screen"/>
         <link rel="stylesheet" href="css/base.css" type="text/css"/>
@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <h1>TurnKey Emby Mediaserver</h1>
+        <h1>TurnKey Mediaserver</h1>
         
         <div id="container-1">
             <ul>
@@ -80,8 +80,8 @@
                            Samba documentation</a>
                         </li>
                         <li>
-                          <a href="http://www.turnkeylinux.org/emby-mediaserver">
-                          TurnKey Emby Mediaserver release notes</a>
+                          <a href="http://www.turnkeylinux.org/mediaserver">
+                          TurnKey Mediaserver release notes</a>
                         </li>
                     </ul>
                 </div>
