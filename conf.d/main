@@ -9,7 +9,18 @@ install()
         install $@
 }
 
-# install python packages needed to setup emby and emby dependencies
+# setup pinning
+REPO_LABEL="home:emby"
+cat >/etc/apt/preferences.d/emby<<EOF
+Package: *
+Pin: release l=$REPO_LABEL
+Pin-Priority: 100
+Package: libmono* mono* libemby* emby-server
+Pin: release o=obs://build.opensuse.org/home:emby/Debian_8.0
+Pin-Priority: 500
+EOF
+
+# install emby dependencies (from 3rd party repo)
 install mono-runtime libembymagickcore-6.q8-2 libembymagickwand-6.q8-2
 
 # install emby and configure it, HACK since emby blocks the shell when it starts from the deb install
@@ -96,7 +107,6 @@ rm -r /var/lib/emby-server
 systemctl enable emby-server.service
 
 # add TurnKey credit to log in page
-OLD_LINE="<LoginDisclaimer />"
-NEW_LINE="<LoginDisclaimer>\&lt;a href=\"https://www.turnkeylinux.org/emby-mediaserver\"\&gt;TurnKey Linux Emby Mediaserver appliance\&lt;/a\&gt;</LoginDisclaimer>"
-sed -i "s|$OLD_LINE|$NEW_LINE|" /var/lib/emby-server/config/branding.xml
+mkdir -p /var/lib/emby-server/config/
+mv /usr/local/src/emby-branding.xml  /var/lib/emby-server/config/branding.xml
 

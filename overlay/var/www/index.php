@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Style-Type" content="text/css">
         <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-        <title>TurnKey Emby Mediaserver</title>
+        <title>TurnKey Mediaserver</title>
         
         <link rel="stylesheet" href="css/ui.tabs.css" type="text/css" media="print, projection, screen"/>
         <link rel="stylesheet" href="css/base.css" type="text/css"/>
@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <h1>TurnKey Emby Mediaserver</h1>
+        <h1>TurnKey Mediaserver</h1>
         
         <div id="container-1">
             <ul>
@@ -30,45 +30,42 @@
             </ul>
 
             <div id="cp">
-                <div class="fragment-content">
-
-
-
-                    <div>
-                        <a href="https://<?php print
-                        $_SERVER{'HTTP_HOST'}; ?>:12321/samba/index.cgi">
-                        <img src="images/samba.png"/>Samba<br/>(via webmin)</a>
-                    </div>             
-                    <div>
+                <div class="fragment-content" style="left:50%;margin:0 auto">
+                    <div style="float:left;width:12%"></div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:12320"><img
                         src="images/shell.png"/>Web Shell</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:12321"><img
                         src="images/webmin.png"/>Webmin</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:443"><img
                         src="images/filemanager.png"/>File Manager<br/>(WebDAV)</a>
                     </div>
-                    <div></div>
-                    <div>
+                    <div style="float:left;width:13%"></div>
+
+                    <div style="float:left;width:20%">
+                        <a href="https://<?php print
+                        $_SERVER{'HTTP_HOST'}; ?>:12321/samba/index.cgi">
+                        <img src="images/samba.png"/>Samba<br/>(via webmin)</a>
+                    </div>
+                    <div style="float:left;width:20%">
                         <a href="http://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:8096"><img
-                        src="images/emby.png"/>Emby Frontend<br/>(HTTP)</a>
+                        src="images/emby.png"/>Emby<br/>(HTTP)</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:8920"><img
-                        src="images/emby.png"/>Emby Backend<br />(HTTPS)</a>
+                        src="images/emby.png"/>Emby<br />(HTTPS)</a>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div style="float:left;width:30%"></div>
+
                     <h2>Resources and references</h2>
                     <ul>
                         <li>
@@ -80,8 +77,8 @@
                            Samba documentation</a>
                         </li>
                         <li>
-                          <a href="http://www.turnkeylinux.org/emby-mediaserver">
-                          TurnKey Emby Mediaserver release notes</a>
+                          <a href="http://www.turnkeylinux.org/mediaserver">
+                          TurnKey Mediaserver release notes</a>
                         </li>
                     </ul>
                 </div>
