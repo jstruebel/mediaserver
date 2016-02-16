@@ -30,45 +30,42 @@
             </ul>
 
             <div id="cp">
-                <div class="fragment-content">
-
-
-
-                    <div>
-                        <a href="https://<?php print
-                        $_SERVER{'HTTP_HOST'}; ?>:12321/samba/index.cgi">
-                        <img src="images/samba.png"/>Samba<br/>(via webmin)</a>
-                    </div>             
-                    <div>
+                <div class="fragment-content" style="left:50%;margin:0 auto">
+                    <div style="float:left;width:12%"></div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:12320"><img
                         src="images/shell.png"/>Web Shell</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:12321"><img
                         src="images/webmin.png"/>Webmin</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:443"><img
                         src="images/filemanager.png"/>File Manager<br/>(WebDAV)</a>
                     </div>
-                    <div></div>
-                    <div>
+                    <div style="float:left;width:13%"></div>
+
+                    <div style="float:left;width:20%">
+                        <a href="https://<?php print
+                        $_SERVER{'HTTP_HOST'}; ?>:12321/samba/index.cgi">
+                        <img src="images/samba.png"/>Samba<br/>(via webmin)</a>
+                    </div>
+                    <div style="float:left;width:20%">
                         <a href="http://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:8096"><img
                         src="images/emby.png"/>Emby Frontend<br/>(HTTP)</a>
                     </div>
-                    <div>
+                    <div style="float:left;width:20%">
                         <a href="https://<?php print
                         $_SERVER{'HTTP_HOST'}; ?>:8920"><img
                         src="images/emby.png"/>Emby Backend<br />(HTTPS)</a>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div style="float:left;width:30%"></div>
+
                     <h2>Resources and references</h2>
                     <ul>
                         <li>
