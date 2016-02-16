@@ -107,7 +107,6 @@ rm -r /var/lib/emby-server
 systemctl enable emby-server.service
 
 # add TurnKey credit to log in page
-OLD_LINE="<LoginDisclaimer />"
-NEW_LINE="<LoginDisclaimer>\&lt;a href=\"https://www.turnkeylinux.org/mediaserver\"\&gt;TurnKey Linux Mediaserver appliance\&lt;/a\&gt;</LoginDisclaimer>"
-sed -i "s|$OLD_LINE|$NEW_LINE|" /var/lib/emby-server/config/branding.xml
+mkdir -p /var/lib/emby-server/config/
+mv /usr/local/src/emby-branding.xml  /var/lib/emby-server/config/branding.xml
 
