@@ -10,13 +10,13 @@ install()
 }
 
 # setup pinning
-REPO_LABEL="home:emby"
+REPO_ORIGIN="obs://build.opensuse.org/home:emby/Debian_8.0"
 cat >/etc/apt/preferences.d/emby<<EOF
 Package: *
-Pin: release l=$REPO_LABEL
+Pin: release o=$REPO_ORIGIN
 Pin-Priority: 100
 Package: libmono* mono* libemby* emby-server
-Pin: release o=obs://build.opensuse.org/home:emby/Debian_8.0
+Pin: release o=$REPO_ORIGIN
 Pin-Priority: 500
 EOF
 
