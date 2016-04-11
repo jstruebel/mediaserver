@@ -1,16 +1,13 @@
-Mediaserver - Simple Network Attached Media Storage
-===================================================
+Emby MediaServer - Simple Network Attached Media Storage
+========================================================
 
-TurnKey Mediaserver allows you to bring all of your home videos, 
-music, and photos together into one place. Mediaserver combines 
-Windows-compatible network file sharing with web based library 
-and file managers. Powered by `Emby`_, TurnKey Mediaserver can 
-automatically convert and stream your media on-the-fly to play on 
-any DLNA supported device. Additionally TurnKey Mediaserver
-includes support for SMB (via `Samba`_), SFTP, NFS, WebDAV (via 
-`SambaDAV`_) and rsync file transfer protocols. The server is 
-configured to allow users to manage files in private or public 
-storage. 
+Emby MediaServer makes it easy to bring all of your home videos, music,
+and photos together into a single server that automatically converts and
+streams your media on-the-fly to play on any device. This app integrates
+the `Emby`_ file management web app with Windows-compatible network file
+sharing (via `Samba`_) and other transfer protocols including SFTP,
+rsync, NFS, and WebDAV. Files can be managed in private or public
+storage.
 
 This appliance includes all the standard features in `TurnKey Core`_,
 and on top of that:
