@@ -1,7 +1,7 @@
-Emby MediaServer - Simple Network Attached Media Storage
-========================================================
+MediaServer - Simple Network Attached Media Storage
+===================================================
 
-Emby MediaServer makes it easy to bring all of your home videos, music,
+TurnKey MediaServer makes it easy to bring all of your home videos, music,
 and photos together into a single server that automatically converts and
 streams your media on-the-fly to play on any device. This app integrates
 `Emby`_ with a file management web app, Windows-compatible network file
