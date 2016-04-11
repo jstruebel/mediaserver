@@ -1,6 +1,6 @@
 turnkey-mediaserver-14.1 (1) turnkey; urgency=low
 
-  * Initial public release of TurnKey Media Server
+  * Initial public release of TurnKey Media Server thanks to Jonathan Struebel!
 
   * Emby media server configured with library in shared storage directory
 
