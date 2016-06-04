@@ -3,19 +3,23 @@
 
 . /etc/default/inithooks
 
-EMBY_RUNNING=$(/etc/init.d/emby-server status > /dev/null; echo $?)
 EMBY_SERVER=127.0.0.1
 EMBY_PORT=8096
 CURL="curl --output /dev/null --silent --head --fail"
 
+emby_running () {
+    local pidfile='/run/emby-server.pid'
+    [ -e "$pidfile" ] && kill -0 $( cat $pidfile )
+}
+
 # Start Emby server if not running
-if [ "$EMBY_RUNNING" != "0" ]; then
-    /etc/init.d/emby-server start
+if ! emby_running; then
+    service emby-server start
 fi
 
 # Delay until emby has finished starting
 until $($CURL http://$EMBY_SERVER:$EMBY_PORT); do
-    printf .
+    echo -n .
     sleep 5
 done
 
@@ -28,6 +32,6 @@ else
     rm -f /etc/embypass
 fi
 
-if [ "$EMBY_RUNNING" != "0" ]; then
-    /etc/init.d/emby-server stop
+if emby_running; then
+    service emby-server stop
 fi
